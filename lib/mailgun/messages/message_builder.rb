@@ -93,7 +93,7 @@ module Mailgun
       if attachment.is_a?(String)
         attachment = File.open(attachment, "r")
       end
-      if !attachment.is_a?(File) || !attachment.respond_to?(:read)
+      if  (!(attachment.is_a?(Tempfile) || attachment.is_a?(File)) || !attachment.respond_to?(:read)
         raise ParameterError.new("Unable to access attachment file object.")
       end
       if !filename.nil?
